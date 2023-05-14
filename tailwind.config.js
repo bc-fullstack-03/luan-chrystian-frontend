@@ -35,6 +35,17 @@ export default {
     extend: {
       fontFamily: {
         sans: 'Inter, sans-serif'
+      },
+
+      screens: {
+        s : {
+          raw: '(max-height:600px)',
+        },
+
+        m: {
+          raw: '(max-height:800px)'
+        }
+        
       }
     },
   },
