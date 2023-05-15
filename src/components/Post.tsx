@@ -12,18 +12,18 @@ export function Post({ profile, name, text, image, likes, comments }: PostProps)
     }
 
     return (
-        <section className='border-t border-b border-gray-300 pl-5 pt-5 pb-5    '>
+        <section className='border-b border-gray-300 pl-5 pt-5 pb-5'>
 
-            <div className='flex items-center '>
+            <div className='flex items-center'>
 
                 <img className='mr-4 rounded-full w-[50px] h-[50px]' src={photoProfileUrl} alt="" />
 
-                <p className='font-bold text-white text-lg'>{name}</p>
+                <p className='font-bold text-white text-lg mobile:text-md'>{name}</p>
             </div>
 
-            <div className='ml-[66px]'>
+            <div className='ml-[66px] mobile:pr-4'>
                 <div className=' '>
-                    <p className='text-md text-white font-normal'>{text}</p>
+                    <p className='text-md text-white font-normal mobile:text-sm'>{text}</p>
 
                     {image &&
                         <img className='max-h-[216px] object-contain mt-2 rounded-[4px]' src={image} alt="" />

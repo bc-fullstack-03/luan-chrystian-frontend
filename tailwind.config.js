@@ -38,14 +38,12 @@ export default {
       },
 
       screens: {
-        s : {
+        notebook : {
           raw: '(max-height:600px)',
         },
-
-        m: {
-          raw: '(max-height:800px)'
+        mobile: {
+          raw: '(max-width: 648px)'
         }
-        
       }
     },
   },
