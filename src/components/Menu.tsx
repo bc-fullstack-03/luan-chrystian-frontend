@@ -26,7 +26,7 @@ export function Menu() {
                     </div>
 
                     <ul className="flex flex-col gap-14 mb-14 mt-12">
-                        <li >
+                        <li>
                             <Link className="text-lg font-bold text-white flex gap-4 items-center" to="/home">
                                 <img src="../src/assets/home.svg" alt="" /> {showMenu == true ? '' : 'Página inicial'}
                             </Link>
