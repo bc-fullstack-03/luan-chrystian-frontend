@@ -1,5 +1,5 @@
 import { Button } from "./Button"
-import { FriendProps } from "../types/FriendProps"
+import { FriendProps } from "./types/FriendProps"
 import { User } from "./User"
 
 export function Friend({ name, photoUrl, follows, following }: FriendProps) {

@@ -1,5 +1,5 @@
 import { Chat, Heart } from 'phosphor-react'
-import { PostFeedProps } from '../types/PostFeed';
+import { PostFeedProps } from './types/PostFeed';
 import { User } from './User';
 import { Link } from 'react-router-dom';
 

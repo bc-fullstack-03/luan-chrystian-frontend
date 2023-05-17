@@ -1,13 +1,20 @@
 import { Button } from "./Button";
 import { useState } from 'react'
-import { FiMenu } from 'react-icons/fi'
-import { Link } from "react-router-dom"
+import { FiMenu, FiLogOut } from 'react-icons/fi'
+import { useAuth } from "../hooks/auth";
+import { MenuItem } from "./MenuItem";
 
 export function Menu() {
     const [showMenu, setShowMenu] = useState(false);
 
+    const { signOut }: any = useAuth()
+
     function handleMenuInMobile() {
         showMenu == true ? setShowMenu(false) : setShowMenu(true)
+    }
+
+    function handleLogout() {
+        signOut()
     }
 
     return (
@@ -26,23 +33,21 @@ export function Menu() {
                     </div>
 
                     <ul className="flex flex-col gap-14 mb-14 mt-12">
-                        <li>
-                            <Link className="text-lg font-bold text-white flex gap-4 items-center" to="/home">
-                                <img src="../src/assets/home.svg" alt="" /> {showMenu == true ? '' : 'Página inicial'}
-                            </Link>
-                        </li>
+                        <MenuItem route="/">
+                            <img src="../src/assets/home.svg" alt="" /> {showMenu == true ? '' : 'Página inicial'}
+                        </MenuItem>
 
-                        <li>
-                            <Link className="flex gap-4 items-center text-lg font-bold text-white" to="/profile">
-                                <img src="../src/assets/people.svg" alt="" /> {showMenu == true ? '' : 'Perfil'}
-                            </Link>
-                        </li>
+                        <MenuItem route="/profile">
+                            <img src="../src/assets/people.svg" alt="" /> {showMenu == true ? '' : 'Perfil'}
+                        </MenuItem>
 
-                        <li>
-                            <Link className="flex gap-4 items-center text-lg font-bold text-white" to="/friends">
-                                <img src="../src/assets/friends.svg" alt="" /> {showMenu == true ? '' : 'Amigos'}
-                            </Link>
-                        </li>
+                        <MenuItem route="/friends" >
+                            <img src="../src/assets/friends.svg" alt="" /> {showMenu == true ? '' : 'Amigos'}
+                        </MenuItem>
+
+                        <MenuItem route="/" onClick={handleLogout}>
+                            <FiLogOut size={40} /> {showMenu == true ? '' : 'Sair'}
+                        </MenuItem>
                     </ul>
 
                     <Button title={showMenu == true ? '+' : 'Novo Post'} />

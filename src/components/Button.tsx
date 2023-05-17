@@ -1,4 +1,4 @@
-import { ButtonProps } from "../types/ButtonProps"
+import { ButtonProps } from "./types/ButtonProps"
 
 export function Button({ title, type, onClick }: ButtonProps) {
 

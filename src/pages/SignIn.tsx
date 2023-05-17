@@ -4,8 +4,19 @@ import { Button } from "../components/Button"
 import { Envelope } from 'phosphor-react'
 import { Lock } from 'phosphor-react'
 import { Link } from "react-router-dom";
+import { useState } from "react"
+import { useAuth } from "../hooks/auth"
 
 export const SignIn = function () {
+    const [email, setEmail] = useState<string>("")
+    const [password, setPassword] = useState<string>("")
+
+    const { signIn }: any = useAuth()
+
+    function handleSignIn(event: React.FormEvent) {
+        event.preventDefault()
+        signIn({ email, password })
+    }
 
     return (
         <div className="w-screen h-screen bg-gray-900 flex flex-col items-center justify-center">
@@ -15,11 +26,26 @@ export const SignIn = function () {
             </header>
 
             <form className="flex flex-col items-stretch w-full max-w-sm mt-10 gap-2 notebook:mt-7">
-                <Input icon={Envelope} title="Endereço de email" placeholder="Digite seu email" type="text" />
-                <Input icon={Lock} title="Senha" placeholder="Digite sua senha" type="password" />
+                <Input
+                    icon={Envelope}
+                    title="Endereço de email"
+                    placeholder="Digite seu email"
+                    type="text"
+                    onChange={(event) => setEmail(event.target.value)}
+                />
+
+                <Input
+                    icon={Lock}
+                    title="Senha"
+                    placeholder="Digite sua senha"
+                    type="password"
+                    onChange={(event) => setPassword(event.target.value)}
+                />
 
                 <div className="mt-6 notebook:mt-3">
-                    <Button title={'Entrar'} />
+
+                    <Button title={'Entrar'} onClick={handleSignIn} />
+                    
                 </div>
             </form>
 
