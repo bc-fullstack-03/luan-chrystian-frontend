@@ -1,8 +1,8 @@
 export interface PostFeedProps {
-    photoUrl: string | null,
+    photoUrl: string | null | undefined,
     name: string,
     text: string | null,
-    image?: string,
+    image?: string | null,
     likes?: number,
     comments?: number
 }

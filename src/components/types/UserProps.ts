@@ -1,5 +1,5 @@
 
 export interface UserProps {
-    name: string;
-    photoUrl: string | null;
+    name: string | undefined;
+    photoUrl: string | null | undefined;
 }

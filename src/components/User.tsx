@@ -5,7 +5,7 @@ export function User({ name, photoUrl }: UserProps) {
     
     let photoProfileUrl;
 
-    if (photoUrl != null) {
+    if (photoUrl != null || photoUrl != undefined) {
         photoProfileUrl = photoUrl
     } else {
         photoProfileUrl = '../src/assets/User.svg'

@@ -1,6 +1,6 @@
 export interface FriendProps {
     name: string,
     photoUrl: string | null,
-    follows: number,
-    following: number
+    follows?: Follower[] | null |  undefined
+    following?: Following[] | null | undefined
 }

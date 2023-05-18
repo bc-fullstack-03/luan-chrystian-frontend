@@ -10,8 +10,8 @@ export function Friend({ name, photoUrl, follows, following }: FriendProps) {
             <User name={name} photoUrl={photoUrl} />
 
             <div className="mt-3 text-white flex flex-col text-xs ">
-                <span>{follows} Seguidores</span>
-                <span>Seguindo {following}</span>
+                <span>{follows?.length ?? 0} Seguidores</span>
+                <span>Seguindo {following?.length ?? 0}</span>
             </div>
 
             <div className="w-[320px] mobile:w-[200px] mt-5">
