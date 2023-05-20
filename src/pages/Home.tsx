@@ -12,7 +12,25 @@ export const Home = function () {
     const [followingIds, setFollowingIds] = useState<any[]>([])
     const [publications, setPublications] = useState<PublicationProps[]>([]);
 
-    const { authEmail }: any = useAuth()
+    const { authEmail, token }: any = useAuth()
+
+    function verifyAuthorIdPostToShowDeleteButton(authorPostId: string) {
+
+        if (myData?.id !== authorPostId) {
+            return false
+        } else {
+            return true
+        }
+    }
+
+    async function handleDeletePost(id: string) {
+
+        await api.delete(`/publications/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+    }
 
     useEffect(() => {
 
@@ -29,8 +47,14 @@ export const Home = function () {
             const response = await api.get(`/user/email?email=${email}`);
             const myId = response.data.id;
             const following = response.data.following;
-            const ids = following.map((user: any) => user.id);
-            setFollowingIds([myId, ...ids]);
+
+            if (following != null) {
+                const ids = following.map((user: any) => user.id);
+                return setFollowingIds([myId, ...ids]);
+
+            } else {
+                setFollowingIds([myId]);
+            }
         }
 
         getIdUsersIFollow()
@@ -60,7 +84,7 @@ export const Home = function () {
 
         getPublications()
 
-    }, [followingIds])
+    }, [followingIds, publications])
 
     return (
         <div className="w-screen min-h-screen bg-gray-900 flex">
@@ -82,11 +106,14 @@ export const Home = function () {
                         publications.map((data
                         ) => (
                             <PostFeed
-                                photoUrl={data.photoProfileAuthor}
+                                key={data.postId}
+                                photoProfileUrl={data.photoProfile}
                                 name={data.nameAuthor}
                                 text={data.contentText}
                                 image={data.contentImage}
-                                key={data.postId}
+                                to={data.postId}
+                                deletePubli={() => handleDeletePost(data.postId)}
+                                verifyIdAuthorPost={verifyAuthorIdPostToShowDeleteButton(data.authorId)}
                             />
                         ))
                     }

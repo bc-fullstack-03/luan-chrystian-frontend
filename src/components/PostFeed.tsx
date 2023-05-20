@@ -1,18 +1,22 @@
-import { Chat, Heart } from 'phosphor-react'
+import { Chat, Heart, Trash } from 'phosphor-react'
 import { PostFeedProps } from './types/PostFeed';
 import { User } from './User';
 import { Link } from 'react-router-dom';
 
-export function PostFeed({ photoUrl, name, text, image, likes, comments }: PostFeedProps) {
+export function PostFeed({ photoProfileUrl, name, text, image, likes, comments, to, deletePubli, verifyIdAuthorPost }: PostFeedProps) {
 
     return (
         <section className='border-b border-gray-300 pt-5 pl-5 pb-5'>
 
-            <User name={name} photoUrl={photoUrl} />
+            <div className='flex justify-between items-center'>
+                <User name={name} photoUrl={photoProfileUrl} />
+                <Trash className={` pr-2 text-white cursor-pointer ${verifyIdAuthorPost == false ? "hidden" : ""}`} onClick={deletePubli} size={35} />
+
+            </div>
 
             <div className='ml-[66px] mobile:pr-4'>
 
-                <Link to="/publication" >
+                <Link to={`/publication?id=${to}`} >
                     <p className='text-md text-white font-normal mobile:text-sm'>{text}</p>
 
                     {image &&

@@ -16,9 +16,9 @@ interface PublicationProps  {
     authorId: string;
     nameAuthor: string;
     contentText: string;
-    photoProfileAuthor?: string;
+    photoProfile?: string;
     contentImage?: string;
-    createdAt: string;
+    created_at: string;
     comments?: Comment[];
     likes?: Like[];
 };

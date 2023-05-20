@@ -1,16 +1,44 @@
 import React, { ChangeEvent, useState } from 'react'
-import {  XCircle, Camera } from 'phosphor-react'
+import { XCircle, Camera } from 'phosphor-react'
 import { ButtonProps } from './types/ButtonProps';
 import { InputPublication } from './InputPublication';
 import { useAuth } from '../hooks/auth'
 import { api } from '../services/api';
 import { Button } from './Button';
+import { useNavigate } from 'react-router';
+import { Data } from 'emoji-mart';
+
+interface commentResponseNewPubli {
+    id: string;
+    authorId: string;
+    postId: string;
+    content: string;
+}
+
+interface likeResponseNewPubli {
+    name: string;
+    userId: string;
+    postId: string;
+}
+
+interface newPubliResponse {
+    id: string;
+    userId: string;
+    nameAuthor: string;
+    photoProfile: string;
+    contentText: string;
+    contentImage: string;
+    created_at: string;
+    comments: commentResponseNewPubli[];
+    likes: likeResponseNewPubli[];
+}
 
 export function NewPublication({ close }: ButtonProps) {
     const [inputValue, setInputValue] = useState('')
     const [image, setImage] = useState<File | undefined>();
 
     const { token }: any = useAuth()
+    const navigate = useNavigate()
 
     function handlePhotoUpload(event: ChangeEvent<HTMLInputElement>) {
         const file = event.target.files?.[0]
@@ -30,15 +58,19 @@ export function NewPublication({ close }: ButtonProps) {
             formData.append("photo", image);
         }
 
-        await api.post("/publications/new", formData, {
+        const response = await api.post("/publications/new", formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
                 Authorization: `Bearer ${token}`
             }
         })
-            .then(() => {
-                alert("Publicação realizada com sucesso")
-            });
+
+        const data = response.data
+
+
+       
+        navigate(`/publication?id=${data.id}`)
+        alert("Publicação realizada com sucesso")
     }
 
     return (
