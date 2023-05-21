@@ -6,7 +6,6 @@ import { useAuth } from '../hooks/auth'
 import { api } from '../services/api';
 import { Button } from './Button';
 import { useNavigate } from 'react-router';
-import { Data } from 'emoji-mart';
 
 interface commentResponseNewPubli {
     id: string;

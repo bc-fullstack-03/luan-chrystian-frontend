@@ -15,6 +15,7 @@ interface PublicationProps  {
     postId: string;
     authorId: string;
     nameAuthor: string;
+    username: string;
     contentText: string;
     photoProfile?: string;
     contentImage?: string;

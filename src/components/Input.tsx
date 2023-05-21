@@ -1,6 +1,6 @@
 import { InputProps } from "./types/InputProps"
 
-export function Input({ icon: Icon, title, ...rest }: InputProps) {
+export function Input({ icon: Icon, title, value, ...rest }: InputProps) {
     return (
         <div>
             <label htmlFor={title} className="text-white font-semibold text-xs">{title}</label>
@@ -14,6 +14,7 @@ export function Input({ icon: Icon, title, ...rest }: InputProps) {
                     className="bg-transparent w-full text-gray-300 text-xs placeholder:text-gray-300 outline-none shadow-none"
                     autoComplete="none"
                     id={title}
+                    value={value}
                     {...rest}
                 />
             </div>

@@ -1,3 +1,5 @@
+const { blackA, mauve, violet } = require('@radix-ui/colors');
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -24,12 +26,16 @@ export default {
 
       white: '#ffffff',
       black: '#000',
-      
+
       gray: {
         900: '#121214',
         600: '#202024',
         300: '#7C7C8A'
-      }
+      },
+
+      ...blackA,
+      ...mauve,
+      ...violet,
     },
 
     extend: {
@@ -38,12 +44,13 @@ export default {
       },
 
       screens: {
-        notebook : {
+        notebook: {
           raw: '(max-height:600px)',
         },
         mobile: {
           raw: '(max-width: 648px)'
-        }
+        },
+
       }
     },
   },

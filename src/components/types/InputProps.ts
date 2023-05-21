@@ -1,10 +1,9 @@
 import { IconProps} from 'phosphor-react'
-import { ChangeEvent } from 'react';
+import { InputHTMLAttributes } from 'react';
 
-export interface InputProps {
+
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     icon: React.ComponentType<IconProps>;
     title:string;
-    placeholder: string;
     type: "text" | "password" | "email";
-    onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
     }

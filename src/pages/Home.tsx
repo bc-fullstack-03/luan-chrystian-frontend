@@ -37,6 +37,7 @@ export const Home = function () {
         async function fetchMyData() {
             const email: string = authEmail.replace(/"/g, "")
             const response = await api.get(`/user/email?email=${email}`)
+            console.log(response)
             setMyData(response.data)
         }
 
@@ -84,7 +85,7 @@ export const Home = function () {
 
         getPublications()
 
-    }, [followingIds, publications])
+    }, [publications, followingIds, myData])
 
     return (
         <div className="w-screen min-h-screen bg-gray-900 flex">
@@ -93,7 +94,8 @@ export const Home = function () {
             <Section>
                 <div className="border-b border-gray-300  pl-5 pb-5">
                     <h2 className="font-bold text-lg text-white mb-4 mobile:text-center">Página Inicial</h2>
-                    <User name={myData?.name} photoUrl={myData?.avatarUri} />
+                    
+                    <User name={myData?.username} photoUrl={myData?.avatarUri} />
 
                     <ExitButton />
 
@@ -108,7 +110,7 @@ export const Home = function () {
                             <PostFeed
                                 key={data.postId}
                                 photoProfileUrl={data.photoProfile}
-                                name={data.nameAuthor}
+                                name={data.username}
                                 text={data.contentText}
                                 image={data.contentImage}
                                 to={data.postId}
