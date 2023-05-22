@@ -1,5 +1,5 @@
 import { FiLogOut } from "react-icons/fi"
-import { useAuth } from "../hooks/auth"
+import { useAuth } from "../hooks/contexts/authContext"
 
 
 export function ExitButton() {

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Input } from "./Input";
 import { InputUpdate } from "./InputUpdate";
 import { Calendar } from 'phosphor-react'
-import { useAuth } from "../hooks/auth";
+import { useAuth } from "../hooks/contexts/authContext";
 import { api } from "../services/api";
 import { InputSelect } from "./InputSelect";
 

@@ -4,8 +4,10 @@ export interface PostFeedProps {
     text: string | null,
     image?: string | null,
     likes?: number,
+    isLiked?: boolean
+    handleLike?: () => void
     comments?: number
-    to:string
+    postId: string
     deletePubli?: () => void
     verifyIdAuthorPost: boolean
 }

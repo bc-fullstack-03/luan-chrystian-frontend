@@ -5,7 +5,7 @@ import { Envelope } from 'phosphor-react'
 import { Lock } from 'phosphor-react'
 import { Link } from "react-router-dom";
 import { useState } from "react"
-import { useAuth } from "../hooks/auth"
+import { useAuth } from "../hooks/contexts/authContext"
 
 export const SignIn = function () {
     const [email, setEmail] = useState<string>("")

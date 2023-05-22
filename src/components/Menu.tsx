@@ -1,7 +1,7 @@
 import { Button } from "./Button";
 import { useState } from 'react'
 import { FiMenu, FiLogOut } from 'react-icons/fi'
-import { useAuth } from "../hooks/auth";
+import { useAuth } from "../hooks/contexts/authContext";
 import { MenuItem } from "./MenuItem";
 import { NewPublication } from "./NewPublication";
 

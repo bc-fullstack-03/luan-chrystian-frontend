@@ -3,7 +3,8 @@ import { PostFeedProps } from './types/PostFeed';
 import { User } from './User';
 import { Link } from 'react-router-dom';
 
-export function PostFeed({ photoProfileUrl, name, text, image, likes, comments, to, deletePubli, verifyIdAuthorPost }: PostFeedProps) {
+export function PostFeed({ photoProfileUrl, name, text, image, likes, handleLike, comments, postId, deletePubli, verifyIdAuthorPost }: PostFeedProps) {
+    
 
     return (
         <section className='border-b border-gray-300 pt-5 pl-5 pb-5'>
@@ -16,7 +17,7 @@ export function PostFeed({ photoProfileUrl, name, text, image, likes, comments, 
 
             <div className='ml-[66px] mobile:pr-4'>
 
-                <Link to={`/publication?id=${to}`} >
+                <Link to={`/publication?id=${postId}`} >
                     <p className='text-md text-white font-normal mobile:text-sm'>{text}</p>
 
                     {image &&
@@ -25,8 +26,8 @@ export function PostFeed({ photoProfileUrl, name, text, image, likes, comments, 
                 </Link>
 
                 <div className=' flex  text-white mt-3 text-md gap-10'>
-                    <span className='flex items-center gap-2'><Chat size={24} /> {likes} </span>
-                    <span className='flex items-center gap-2'><Heart size={24} /> {comments} </span>
+                    <span className='flex items-center gap-2'><Chat size={24} /> {comments} </span>
+                    <span className='flex items-center gap-2'><Heart onClick={handleLike} className='cursor-pointer' size={24} /> {likes} </span>
                 </div>
             </div>
         </section>

@@ -3,7 +3,7 @@ import { Input } from "./Input"
 import { FiMail } from "react-icons/fi"
 import { User, Lock } from 'phosphor-react'
 import { api } from "../services/api"
-import { useAuth } from "../hooks/auth"
+import { useAuth } from "../hooks/contexts/authContext"
 import { InputUpdate } from "./InputUpdate"
 
 export function UserDataScreen({ photoUrl, email, name, username }: UserDataUpdateProps) {

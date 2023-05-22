@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState } from 'react'
 import { XCircle, Camera } from 'phosphor-react'
 import { ButtonProps } from './types/ButtonProps';
 import { InputPublication } from './InputPublication';
-import { useAuth } from '../hooks/auth'
+import { useAuth } from '../hooks/contexts/authContext'
 import { api } from '../services/api';
 import { Button } from './Button';
 import { useNavigate } from 'react-router';

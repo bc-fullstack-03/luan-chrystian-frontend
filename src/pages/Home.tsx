@@ -4,7 +4,8 @@ import { Section } from "../components/Section"
 import { User } from "../components/User"
 import { useEffect, useState } from 'react'
 import { api } from "../services/api"
-import { useAuth } from "../hooks/auth"
+import { useAuth } from "../hooks/contexts/authContext"
+import { usePublicationManager } from "../hooks/contexts/publicationContext"
 import { ExitButton } from "../components/ExitButton"
 
 export const Home = function () {
@@ -13,6 +14,7 @@ export const Home = function () {
     const [publications, setPublications] = useState<PublicationProps[]>([]);
 
     const { authEmail, token }: any = useAuth()
+    const { deletePost, likeManager }: any = usePublicationManager()
 
     function verifyAuthorIdPostToShowDeleteButton(authorPostId: string) {
 
@@ -24,12 +26,11 @@ export const Home = function () {
     }
 
     async function handleDeletePost(id: string) {
+        deletePost(id, token)
+    }
 
-        await api.delete(`/publications/${id}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
+    async function handleLike(postId: string) {
+        likeManager(publications, myData?.id, postId)
     }
 
     useEffect(() => {
@@ -37,9 +38,7 @@ export const Home = function () {
         async function fetchMyData() {
             const email: string = authEmail.replace(/"/g, "")
             const response = await api.get(`/user/email?email=${email}`)
-            console.log(response)
             setMyData(response.data)
-            console.log(myData)
         }
 
         fetchMyData()
@@ -95,7 +94,7 @@ export const Home = function () {
             <Section>
                 <div className="border-b border-gray-300  pl-5 pb-5">
                     <h2 className="font-bold text-lg text-white mb-4 mobile:text-center">Página Inicial</h2>
-                    
+
                     <User name={myData?.username} photoUrl={myData?.avatarUri} />
 
                     <ExitButton />
@@ -111,10 +110,11 @@ export const Home = function () {
                             <PostFeed
                                 key={data.postId}
                                 photoProfileUrl={data.photoProfile}
+                                handleLike={() => handleLike(data.postId)}
                                 name={data.username}
                                 text={data.contentText}
                                 image={data.contentImage}
-                                to={data.postId}
+                                postId={data.postId}
                                 deletePubli={() => handleDeletePost(data.postId)}
                                 verifyIdAuthorPost={verifyAuthorIdPostToShowDeleteButton(data.authorId)}
                             />

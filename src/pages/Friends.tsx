@@ -3,7 +3,7 @@ import { Menu } from "../components/Menu"
 import { Section } from "../components/Section"
 import { useEffect, useState } from "react"
 import { api } from "../services/api"
-import { useAuth } from "../hooks/auth"
+import { useAuth } from "../hooks/contexts/authContext"
 
 export const Friends = function () {
     const [followingUsernames, setFollowingUsernames] = useState<[]>([])
