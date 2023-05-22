@@ -39,6 +39,7 @@ export const Home = function () {
             const response = await api.get(`/user/email?email=${email}`)
             console.log(response)
             setMyData(response.data)
+            console.log(myData)
         }
 
         fetchMyData()

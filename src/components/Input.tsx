@@ -1,4 +1,4 @@
-import { InputProps } from "./types/InputProps"
+import { InputProps } from "./types/InputProps";
 
 export function Input({ icon: Icon, title, value, ...rest }: InputProps) {
     return (
