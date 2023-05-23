@@ -7,6 +7,8 @@ import { api } from "../services/api"
 import { useAuth } from "../hooks/contexts/authContext"
 import { usePublicationManager } from "../hooks/contexts/publicationContext"
 import { ExitButton } from "../components/ExitButton"
+import { useDataUser } from "../hooks/contexts/UserContext"
+import { UserProps } from "../components/types/UserProps"
 
 export const Home = function () {
     const [myData, setMyData] = useState<User>()
@@ -15,9 +17,10 @@ export const Home = function () {
 
     const { authEmail, token }: any = useAuth()
     const { deletePost, likeManager }: any = usePublicationManager()
+    // const { data }: any = useDataUser()
 
     function verifyAuthorIdPostToShowDeleteButton(authorPostId: string) { return myData?.id == authorPostId ? true : false }
-        
+
     useEffect(() => {
 
         async function fetchMyData() {
@@ -31,6 +34,7 @@ export const Home = function () {
         async function getIdUsersIFollow() {
             const email: string = authEmail.replace(/"/g, "");
             const response = await api.get(`/user/email?email=${email}`);
+            console.log(response.data)
             const myId = response.data.id;
             const following = response.data.following;
 
@@ -80,7 +84,12 @@ export const Home = function () {
                 <div className="border-b border-gray-300  pl-5 pb-5">
                     <h2 className="font-bold text-lg text-white mb-4 mobile:text-center">Página Inicial</h2>
 
-                    <User name={myData?.username} photoUrl={myData?.avatarUri} />
+                    {myData &&
+                        (
+                            <User name={myData.username} photoUrl={myData.avatarUri} />
+                        )
+                    }
+
 
                     <ExitButton />
 
