@@ -75,7 +75,7 @@ export function UserDataScreen({ photoUrl, email, name, username }: UserDataUpda
             })
 
         } else {
-            return console.log("Operação cancelada")
+            return
         }
     }
 

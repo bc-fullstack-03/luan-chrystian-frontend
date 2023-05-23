@@ -48,8 +48,8 @@ export function Menu() {
                             <img src="../src/assets/people.svg" alt="" /> {showMenu == true ? '' : 'Perfil'}
                         </MenuItem>
 
-                        <MenuItem route="/friends" >
-                            <img src="../src/assets/friends.svg" alt="" /> {showMenu == true ? '' : 'Amigos'}
+                        <MenuItem route="/social" >
+                            <img src="../src/assets/friends.svg" alt="" /> {showMenu == true ? '' : 'Social'}
                         </MenuItem>
                     </ul>
 

@@ -107,8 +107,8 @@ export function Publication() {
                             <TextArea height="h-[145px]" title="Comentar" onChange={(event): any => setComment(event.target.value)} />
                         </div>
 
-                        <div className="pl-5 pb-4 mt-1" >
-                            <Button width="w-[180px]" title="Comentar" onClick={handleCreateComment} />
+                        <div className="pl-5 pb-4 mt-1 max-w-[180px]" >
+                            <Button title="Comentar" onClick={handleCreateComment} />
                         </div>
 
                     </div>

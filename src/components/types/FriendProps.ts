@@ -3,4 +3,5 @@ export interface FriendProps {
     photoUrl: string | null,
     follows?: Follower[] | null |  undefined
     following?: Following[] | null | undefined
+    handle?: () => void
 }

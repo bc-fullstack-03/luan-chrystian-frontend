@@ -34,7 +34,6 @@ export const Home = function () {
         async function getIdUsersIFollow() {
             const email: string = authEmail.replace(/"/g, "");
             const response = await api.get(`/user/email?email=${email}`);
-            console.log(response.data)
             const myId = response.data.id;
             const following = response.data.following;
 

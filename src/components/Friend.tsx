@@ -2,7 +2,7 @@ import { Button } from "./Button"
 import { FriendProps } from "./types/FriendProps"
 import { User } from "./User"
 
-export function Friend({ name, photoUrl, follows, following }: FriendProps) {
+export function Friend({ name, photoUrl, follows, following, handle }: FriendProps) {
 
     return (
         <div className='flex flex-col border-b border-gray-300 pl-5 pt-5 pb-8'>
@@ -15,7 +15,7 @@ export function Friend({ name, photoUrl, follows, following }: FriendProps) {
             </div>
 
             <div className="w-[320px] mobile:w-[200px] mt-5">
-                <Button title="Seguir" />
+                <Button onClick={handle} title="Seguir" />
             </div>
         </div>
     )
