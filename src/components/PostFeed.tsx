@@ -4,7 +4,6 @@ import { User } from './User';
 import { Link } from 'react-router-dom';
 
 export function PostFeed({ photoProfileUrl, name, text, image, likes, handleLike, comments, postId, deletePubli, verifyIdAuthorPost }: PostFeedProps) {
-    
 
     return (
         <section className='border-b border-gray-300 pt-5 pl-5 pb-5'>

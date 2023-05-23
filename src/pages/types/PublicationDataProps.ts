@@ -3,6 +3,9 @@ interface Comment  {
     authorId: string;
     postId: string;
     content: string;
+    photoProfileUri: string,
+    nameAuthor: string,
+    username: string
 };
 
 interface Like  {

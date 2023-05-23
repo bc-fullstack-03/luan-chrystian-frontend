@@ -52,8 +52,8 @@ export const Profile = function () {
 
                 <div className="flex gap-12 bg-black text-gray-300 items-center justify-center mx-auto px-32 py-3 rounded-xl">
                     <p onClick={toggleUserData}>Dados pessoais</p>
-                    <p onClick={toggleBiography}>BIografia</p>
-                    <p>Seguidores e Seguindo</p>
+                    <p onClick={toggleBiography}>Biografia</p>
+                    <p>Suas publicações</p>
                 </div>
 
                 <div>

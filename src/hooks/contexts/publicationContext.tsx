@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { ReactNode } from "react";
 import { api } from "../../services/api";
+import { useAuth } from "./authContext";
 
 interface PublicationProviderProps {
     children: ReactNode
@@ -8,8 +9,9 @@ interface PublicationProviderProps {
 
 export const PublicationContext = createContext({})
 
-
 export function PublicationProvider({ children }: PublicationProviderProps) {
+
+    const { token }: any = useAuth()
 
     async function deletePost(id: string, token: string) {
         await api.delete(`/publications/${id}`, {
@@ -19,9 +21,8 @@ export function PublicationProvider({ children }: PublicationProviderProps) {
         })
     }
 
-
     async function likeManager(publications: PublicationProps[], authUserId: string, postId: string) {
-        
+
         const publication = publications.find((publi) => publi.postId === postId);
 
         if (!publication) {
@@ -35,7 +36,7 @@ export function PublicationProvider({ children }: PublicationProviderProps) {
             if (likedByCurrentUser) {
                 await api.delete(`/like/${authUserId}/${postId}`)
                     .then(() => console.log("Like removido"))
-                
+
             } else {
                 await api.post(`/like/${authUserId}/${postId}`)
                     .then(() => console.log("Curtido com sucesso"))
@@ -47,8 +48,35 @@ export function PublicationProvider({ children }: PublicationProviderProps) {
         }
     }
 
+    async function createComment(comment: string, postId: string) {
+
+        const commentRequestBody = {
+            content: comment
+        }
+
+        await api.post(`/publications/comment/${postId}`, commentRequestBody, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then(() => console.log("Comentário criado"))
+    }
+
+    async function deleteComment(postId: string, commentId: string) {
+        const result = confirm("Confirma para deletar o comentário")
+
+        if (result) {
+            await api.delete(`/publications/comment/${postId}/${commentId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then(() => console.log("Deletado"))
+        } else {
+            console.log("Não deletado")
+        }
+    }
+
     return (
-        <PublicationContext.Provider value={{ deletePost, likeManager }}>
+        <PublicationContext.Provider value={{ deletePost, likeManager, createComment, deleteComment }}>
             {children}
         </PublicationContext.Provider>
     )

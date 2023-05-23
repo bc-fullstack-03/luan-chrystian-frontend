@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from 'react'
 import { XCircle, Camera } from 'phosphor-react'
 import { ButtonProps } from './types/ButtonProps';
-import { InputPublication } from './InputPublication';
+import { TextArea } from './TextArea';
 import { useAuth } from '../hooks/contexts/authContext'
 import { api } from '../services/api';
 import { Button } from './Button';
@@ -83,7 +83,7 @@ export function NewPublication({ close }: ButtonProps) {
 
                     <XCircle size={20} onClick={close} className='text-white ml-[830px] cursor-pointer' />
 
-                    <InputPublication onChange={(event) => setInputValue(event.target.value)} />
+                    <TextArea onChange={(event) => setInputValue(event.target.value)} />
 
                     <div className='flex gap-2 justify-between items-start'>
                         <label htmlFor="photo">

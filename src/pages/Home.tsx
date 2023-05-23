@@ -16,23 +16,8 @@ export const Home = function () {
     const { authEmail, token }: any = useAuth()
     const { deletePost, likeManager }: any = usePublicationManager()
 
-    function verifyAuthorIdPostToShowDeleteButton(authorPostId: string) {
-
-        if (myData?.id !== authorPostId) {
-            return false
-        } else {
-            return true
-        }
-    }
-
-    async function handleDeletePost(id: string) {
-        deletePost(id, token)
-    }
-
-    async function handleLike(postId: string) {
-        likeManager(publications, myData?.id, postId)
-    }
-
+    function verifyAuthorIdPostToShowDeleteButton(authorPostId: string) { return myData?.id == authorPostId ? true : false }
+        
     useEffect(() => {
 
         async function fetchMyData() {
@@ -109,14 +94,16 @@ export const Home = function () {
                         ) => (
                             <PostFeed
                                 key={data.postId}
-                                photoProfileUrl={data.photoProfile}
-                                handleLike={() => handleLike(data.postId)}
+                                postId={data.postId}
                                 name={data.username}
+                                photoProfileUrl={data.photoProfile}
                                 text={data.contentText}
                                 image={data.contentImage}
-                                postId={data.postId}
-                                deletePubli={() => handleDeletePost(data.postId)}
                                 verifyIdAuthorPost={verifyAuthorIdPostToShowDeleteButton(data.authorId)}
+                                comments={data.comments?.length}
+                                likes={data.likes?.length}
+                                handleLike={() => likeManager(publications, myData?.id, data.postId)}
+                                deletePubli={() => deletePost(data.postId, token)}
                             />
                         ))
                     }
