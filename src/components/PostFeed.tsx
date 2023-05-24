@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import { PostFeedProps } from '../types/components/PostFeed';
 import { PublicationProps } from '../types/entities/PublicationProps';
 
-export function PostFeed({ photoProfileUrl, name, text, image, likes, handleLike, userLikedId, comments, postId, deletePubli, verifyIdAuthorPost, publications }: PostFeedProps) {
+export function PostFeed({ photoProfileUrl, name, text, image, likes, handleLike, userLikedId, username, comments, postId, deletePubli, verifyIdAuthorPost, publications }: PostFeedProps) {
     const [publis, setPublis] = useState<PublicationProps[]>([])
     const [isLiked, setIsLiked] = useState<boolean>(false)
 
@@ -27,8 +27,8 @@ export function PostFeed({ photoProfileUrl, name, text, image, likes, handleLike
     return (
         <section className='border-b border-gray-300 pt-5 pl-5 pb-5'>
 
-            <div className='flex justify-between items-center'>
-                <User name={name} photoUrl={photoProfileUrl} />
+            <div className='flex justify-between items-center mb-4'>
+                <User name={name} photoUrl={photoProfileUrl} username={username} />
                 <Trash className={` pr-2 text-white cursor-pointer ${verifyIdAuthorPost == false ? "hidden" : ""}`} onClick={deletePubli} size={35} />
 
             </div>

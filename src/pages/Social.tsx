@@ -8,6 +8,7 @@ import { MagnifyingGlassPlus } from "phosphor-react"
 
 import { api } from "../services/api"
 import { useAuth } from "../hooks/contexts/authContext"
+import { Loading } from "../components/Loading"
 
 export const Social = function () {
     const [inputSearchValue, setInputSearchValue] = useState<string>('*')
@@ -17,6 +18,8 @@ export const Social = function () {
     const [showSearch, setShowSearch] = useState<boolean>(true)
     const [showFollowers, setShowFollowers] = useState<boolean>(false)
     const [showFollowings, setShowFollowings] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+    
 
     const { token, user, authEmail }: any = useAuth()
 
@@ -45,6 +48,7 @@ export const Social = function () {
 
     async function handleFollows(followerId: string) {
         const alreadyFollowing = following?.find(data => data.id === followerId)
+        setIsLoading(true)
 
         if (followerId == user) { alert("Você não pode se seguir") }
 
@@ -55,7 +59,10 @@ export const Social = function () {
                     Authorization: `Bearer ${token}`
                 }
 
-            }).then(() => console.log("Usuário removido"))
+            }).then(() => {
+                setIsLoading(false)
+                console.log("Usuário removido")
+            })
 
         } else {
             await api.post(`/follows/${followerId}`, {}, {
@@ -63,7 +70,10 @@ export const Social = function () {
                     Authorization: `Bearer ${token}`
                 }
 
-            }).then(() => console.log("Usuário seguido"))
+            }).then(() => {
+                setIsLoading(false)
+                console.log("Usuário seguido")
+            })
         }
     }
 
@@ -136,6 +146,7 @@ export const Social = function () {
     return (
         <div className="min-w-screen min-h-screen bg-gray-900 flex overflow-hidden ">
             <Menu />
+            <Loading isLoading={isLoading} />
 
             <Section>
                 <div className="flex gap-12 bg-black text-gray-300 items-center justify-center mx-auto px-32 py-3 rounded-xl mobile:flex-col mobile:gap-1  mobile:px-8">
@@ -150,6 +161,7 @@ export const Social = function () {
                         following.map((data) => (
                             <Friend
                                 name={data.name} key={data.id}
+                                username={data.username}
                                 handle={() => handleFollows(data.id)}
                                 following={data.following}
                                 follows={data.followers}
@@ -169,6 +181,7 @@ export const Social = function () {
                                 following={data.following}
                                 follows={data.followers}
                                 name={data.name}
+                                username={data.username}
                                 handle={() => handleFollows(data.id)}
                                 key={data.id}
                                 photoUrl={data.avatarUri}
@@ -198,6 +211,7 @@ export const Social = function () {
                                 handle={() => handleFollows(data.id)}
                                 following={data.following} follows={data.followers}
                                 name={data.name}
+                                username={data.username}
                                 key={data.id}
                                 photoUrl={data.avatarUri}
                                 isFollowed={verifyIsFollowed(data.id)}

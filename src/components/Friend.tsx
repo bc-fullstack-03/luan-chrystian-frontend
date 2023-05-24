@@ -1,12 +1,12 @@
 import { Button } from "./Button"
 import { User } from "./User"
 
-export function Friend({ name, photoUrl, follows, following, handle, isFollowed }: FriendProps) {
+export function Friend({ name, photoUrl, follows, following, handle, isFollowed, username }: FriendProps) {
 
     return (
         <div className='flex flex-col border-b border-gray-300 pl-5 pt-5 pb-8'>
 
-            <User name={name} photoUrl={photoUrl} />
+            <User name={name} photoUrl={photoUrl} username={username} />
 
             <div className="mt-3 text-white flex flex-col text-xs ">
                 <span>{follows?.length ?? 0} Seguidores</span>

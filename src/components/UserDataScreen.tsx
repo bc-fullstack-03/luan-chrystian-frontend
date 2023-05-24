@@ -2,7 +2,6 @@ import { useState } from "react"
 import { Input } from "./Input"
 import { FiMail } from "react-icons/fi"
 import { User, Lock, Camera, Check } from 'phosphor-react'
-import { FiCamera } from "react-icons/fi"
 import { api } from "../services/api"
 import { useAuth } from "../hooks/contexts/authContext"
 import { InputUpdate } from "./InputUpdate"

@@ -13,4 +13,5 @@
     deletePubli?: () => void
     verifyIdAuthorPost: boolean
     publications? : PublicationProps[]
+    username?: string
 }

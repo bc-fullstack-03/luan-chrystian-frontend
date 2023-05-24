@@ -110,7 +110,7 @@ export const Home = function () {
                             <PostFeed
                                 key={data.postId}
                                 postId={data.postId}
-                                name={data.username}
+                                name={data.nameAuthor}
                                 photoProfileUrl={data.photoProfile}
                                 text={data.contentText}
                                 image={data.contentImage}
@@ -121,6 +121,7 @@ export const Home = function () {
                                 deletePubli={() => deletePost(data.postId, token)}
                                 userLikedId={myData?.id}
                                 publications={publications}
+                                username={data.username}
                             />
                         ))
                     }
