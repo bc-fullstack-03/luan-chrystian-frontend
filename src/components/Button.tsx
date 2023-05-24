@@ -1,5 +1,5 @@
 import { Loading } from "./Loading"
-import { ButtonProps } from "./types/ButtonProps"
+import { ButtonProps } from "../types/components/ButtonProps"
 
 export function Button({ title, type, width, isLoading, onClick }: ButtonProps) {
 

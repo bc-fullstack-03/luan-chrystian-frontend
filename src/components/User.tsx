@@ -1,6 +1,3 @@
-import { UserProps } from "./types/UserProps";
-
-
 export function User({ name, photoUrl }: UserProps) {
     
     let photoProfileUrl;

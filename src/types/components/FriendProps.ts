@@ -1,4 +1,4 @@
-export interface FriendProps {
+ interface FriendProps {
     name: string,
     photoUrl: string | null,
     follows?: Follower[] | null |  undefined

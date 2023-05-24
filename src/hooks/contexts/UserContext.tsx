@@ -13,9 +13,6 @@ export function UserProvider({ children }: PublicationProviderProps) {
     const { authEmail }: any = useAuth()
     const [data, setData] = useState<User>()
 
-
-
-
     useEffect(() => {
         async function fetchUserData() {
             const email: string = authEmail.replace(/"/g, "")

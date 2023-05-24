@@ -1,13 +1,15 @@
-import { SectionProps } from "./types/SectionProps";
 import { FiLogOut } from "react-icons/fi"
 import { useAuth } from "../hooks/contexts/authContext"
+import { ReactNode } from 'react'
+import { useNavigate } from "react-router"
 
-
-export function Section({ children }: SectionProps) {
+export function Section({ children }: {children: ReactNode}) {
 
     const { signOut }: any = useAuth()
+    const navigate = useNavigate()
 
     function handleLogout() {
+        navigate("/")
         signOut()
     }
 

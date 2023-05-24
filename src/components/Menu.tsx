@@ -1,24 +1,15 @@
 import { Button } from "./Button";
 import { useState } from 'react'
-import { FiMenu, FiLogOut } from 'react-icons/fi'
-import { useAuth } from "../hooks/contexts/authContext";
-import { MenuItem } from "./MenuItem";
+import { FiMenu } from 'react-icons/fi'
 import { NewPublication } from "./NewPublication";
+import { Link } from "react-router-dom";
 
 export function Menu() {
     const [showMenu, setShowMenu] = useState(false);
     const [modalPubliVisibility, setModalPubliVisiblity] = useState(false);
-    const [reload, setReload] = useState(false);
-
 
     const toggleModalNewPublication = () => {
-        if (modalPubliVisibility == false) {
-            setModalPubliVisiblity(true)
-        }
-
-        if (modalPubliVisibility == true) {
-            setModalPubliVisiblity(false)
-        }
+        !modalPubliVisibility ? setModalPubliVisiblity(true) : setModalPubliVisiblity(false)
     };
 
     function handleMenuInMobile() {
@@ -28,7 +19,7 @@ export function Menu() {
     return (
         <div className=" border-r border-gray-300">
 
-            <FiMenu onClick={ handleMenuInMobile} className="hidden mobile:block absolute left-1 bg-cyan-500 rounded-lg  text-black" size={30}  />
+            <FiMenu onClick={handleMenuInMobile} className="hidden mobile:block absolute left-1 bg-cyan-500 rounded-lg  text-black" size={30} />
 
             <div className={showMenu ? "" : "mobile:hidden"}>
 
@@ -40,24 +31,31 @@ export function Menu() {
                     </div>
 
                     <ul className="flex flex-col gap-14 mb-14 mt-12">
-                        <MenuItem route="/">
-                            <img src="../src/assets/home.svg" alt="" /> {showMenu == true ? '' : 'Página inicial'}
-                        </MenuItem>
 
-                        <MenuItem route="/profile">
-                            <img src="../src/assets/people.svg" alt="" /> {showMenu == true ? '' : 'Perfil'}
-                        </MenuItem>
+                        <li>
+                            <Link to="/" className="flex gap-4 items-center text-lg font-bold text-white"  >
+                                <img src="../src/assets/home.svg" alt="" /> {showMenu == true ? '' : 'Página inicial'}
+                            </Link>
+                        </li>
 
-                        <MenuItem route="/social" >
-                            <img src="../src/assets/friends.svg" alt="" /> {showMenu == true ? '' : 'Social'}
-                        </MenuItem>
+                        <li>
+                            <Link to="/profile" className="flex gap-4 items-center text-lg font-bold text-white">
+                                <img src="../src/assets/people.svg" alt="" /> {showMenu == true ? '' : 'Perfil'}
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link to="/social" className="flex gap-4 items-center text-lg font-bold text-white">
+                                <img src="../src/assets/friends.svg" alt="" /> {showMenu == true ? '' : 'Social'}
+                            </Link>
+                        </li>
                     </ul>
 
                     <div className="pr-5">
                         <Button onClick={toggleModalNewPublication} title={showMenu == true ? '+' : 'Novo Post'} />
 
                         <div className={`${modalPubliVisibility ? '' : 'hidden'}`}>
-                            <NewPublication close={toggleModalNewPublication}  />
+                            <NewPublication close={toggleModalNewPublication} />
                         </div>
 
                     </div>

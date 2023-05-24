@@ -1,17 +1,9 @@
 import { Trash } from "phosphor-react";
 import { User } from "./User";
-import { MouseEventHandler } from "react";
 import { useAuth } from "../hooks/contexts/authContext";
+import { CommentComponentProps } from "../types/components/CommentProps";
 
-interface CommentProps {
-    author: string
-    photoProfile: string
-    authorCommentId: string
-    comment: string
-    deleteComment: MouseEventHandler<SVGSVGElement>
-}
-
-export function Comment({ author, photoProfile, authorCommentId, comment, deleteComment }: CommentProps) {
+export function Comment({ author, photoProfile, authorCommentId, comment, deleteComment }: CommentComponentProps) {
 
     const { user }: any = useAuth()
 

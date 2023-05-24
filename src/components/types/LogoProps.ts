@@ -1,3 +1,0 @@
-interface LogoProps {
-    subtitle: string
-}

@@ -1,11 +1,15 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { api } from "../../services/api";
-import { AuthProviderProps } from "../types/AuthProvidersProps";
-import { SignInProps } from "../../pages/types/SignInProps";
+
+interface DataState {
+    token: string
+    userID: string
+    email: string
+}
 
 export const AuthContext = createContext({})
 
-export function AuthProvider({ children }: AuthProviderProps) {
+export function AuthProvider({ children }: { children: ReactNode }) {
     const [data, setData] = useState<DataState>({ token: '', userID: '', email: '' })
 
     async function signIn({ email, password }: SignInProps) {
@@ -64,8 +68,3 @@ export function useAuth() {
     return context;
 }
 
-interface DataState {
-    token: string
-    userID: string
-    email: string
-}

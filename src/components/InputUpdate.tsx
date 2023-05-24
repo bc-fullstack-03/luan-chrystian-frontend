@@ -1,17 +1,6 @@
 import { Pencil } from "phosphor-react"
 import { Input } from "./Input"
-import { ReactNode } from 'react'
-import { IconProps } from 'phosphor-react'
-
-interface InputUpdateProps {
-    children: ReactNode
-    onChange: (event: any) => void
-    title: string
-    type: string
-    placeholder: string
-    icon: React.ComponentType<IconProps>;
-    handle: () => void
-}
+import { InputUpdateProps } from "../types/components/InputUpdateProps"
 
 export function InputUpdate({ children, onChange, title, type, placeholder, icon, handle }: InputUpdateProps) {
 

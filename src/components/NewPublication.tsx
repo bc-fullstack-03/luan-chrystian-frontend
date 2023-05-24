@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from 'react'
 import { XCircle, Camera } from 'phosphor-react'
-import { ButtonProps } from './types/ButtonProps';
+import { ButtonProps } from '../types/components/ButtonProps';
 import { TextArea } from './TextArea';
 import { useAuth } from '../hooks/contexts/authContext'
 import { api } from '../services/api';
@@ -8,36 +8,10 @@ import { Button } from './Button';
 import { useNavigate } from 'react-router';
 import { Loading } from './Loading';
 
-interface commentResponseNewPubli {
-    id: string;
-    authorId: string;
-    postId: string;
-    content: string;
-}
-
-interface likeResponseNewPubli {
-    name: string;
-    userId: string;
-    postId: string;
-}
-
-interface newPubliResponse {
-    id: string;
-    userId: string;
-    nameAuthor: string;
-    photoProfile: string;
-    contentText: string;
-    contentImage: string;
-    created_at: string;
-    comments: commentResponseNewPubli[];
-    likes: likeResponseNewPubli[];
-}
-
 export function NewPublication({ close }: ButtonProps) {
     const [inputValue, setInputValue] = useState('')
     const [image, setImage] = useState<File | undefined>();
     const [isLoading, setIsLoading] = useState<boolean>(false)
-
 
     const { token }: any = useAuth()
     const navigate = useNavigate()

@@ -88,15 +88,6 @@ export function Biography() {
     }
 
     async function handleRelationship() {
-        // // const id1 = "6594c404-73fd-4083-b758-806771f290dd"
-        
-
-        // await api.delete(`/user/biography/delete/${id1}`, {
-        //     headers: {
-        //         Authorization: `Bearer ${token}`
-        //     }
-        // })
-
         const status = inputValue
         setInputValue('')
         setIsLoading(true)

@@ -1,15 +1,11 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext } from "react";
 import { ReactNode } from "react";
 import { api } from "../../services/api";
 import { useAuth } from "./authContext";
 
-interface PublicationProviderProps {
-    children: ReactNode
-}
-
 export const PublicationContext = createContext({})
 
-export function PublicationProvider({ children }: PublicationProviderProps) {
+export function PublicationProvider({ children }: { children: ReactNode }) {
 
     const { token }: any = useAuth()
 

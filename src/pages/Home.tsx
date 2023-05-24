@@ -4,6 +4,7 @@ import { Menu } from "../components/Menu"
 import { PostFeed } from "../components/PostFeed"
 import { Section } from "../components/Section"
 import { User } from "../components/User"
+import { PublicationProps } from '../types/entities/PublicationProps'
 
 import { api } from "../services/api"
 import { useAuth } from "../hooks/contexts/authContext"
@@ -18,6 +19,10 @@ export const Home = function () {
     const { deletePost, likeManager }: any = usePublicationManager()
 
     function verifyAuthorIdPostToShowDeleteButton(authorPostId: string) { return myData?.id == authorPostId ? true : false }
+
+    async function handleLiike(postId: string) {
+        await likeManager(publications, myData?.id, postId)
+    }
 
     useEffect(() => {
         async function fetchMyData() {
@@ -112,14 +117,15 @@ export const Home = function () {
                                 verifyIdAuthorPost={verifyAuthorIdPostToShowDeleteButton(data.authorId)}
                                 comments={data.comments?.length}
                                 likes={data.likes?.length}
-                                handleLike={() => likeManager(publications, myData?.id, data.postId)}
+                                handleLike={() => handleLiike(data.postId)}
                                 deletePubli={() => deletePost(data.postId, token)}
+                                userLikedId={myData?.id}
+                                publications={publications}
                             />
                         ))
                     }
                 </div>
             </Section>
-            
         </div>
     )
 }

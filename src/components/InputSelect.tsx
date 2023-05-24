@@ -1,18 +1,9 @@
 import { Pencil } from "phosphor-react"
-import { ReactNode } from "react"
-
-interface InputSelectProps {
-    children: ReactNode
-    selectId: string
-    title: string
-    onChange: (event: any) => void
-    handle: () => void
-}
+import { InputSelectProps } from "../types/components/InputSelectProps"
 
 export function InputSelect({ selectId, title, children, onChange, handle }: InputSelectProps) {
 
     return (
-
 
         <div>
             <label htmlFor={selectId} className=" text-white text-xs ">{title}</label>
