@@ -54,7 +54,7 @@ export function NewPublication({ close }: ButtonProps) {
             <Loading isLoading={isLoading} />
 
             <div
-                className="w-[900px] h-[350px] notebook:h-[220px] bg-gray-600 shadow-cyan-300 shadow-md absolute left-[450px] top-[75px] notebook:left-[200px] notebook:top-[12px] flex flex-col items-center justify-start pt-4 rounded" >
+                className="w-[900px] h-[350px] smallScreen:h-[220px] bg-gray-600 shadow-cyan-300 shadow-md absolute left-[450px] top-[75px] smallScreen:left-[200px] smallScreen:top-[12px] flex flex-col items-center justify-start pt-4 rounded" >
 
                 <form className='flex flex-col gap-2'>
 

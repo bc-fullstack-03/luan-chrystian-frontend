@@ -13,7 +13,7 @@ export function User({ name, photoUrl }: UserProps) {
 
             <img className='mr-4 rounded-full w-[50px] h-[50px]' src={photoProfileUrl} alt="" />
 
-            <p className='font-bold text-white text-lg mobile:text-md'>{name}</p>
+            <p className='font-bold text-white text-lg mobile:text-md mobile:max-w-[150px] '>{name}</p>
         </div>
     )
 }

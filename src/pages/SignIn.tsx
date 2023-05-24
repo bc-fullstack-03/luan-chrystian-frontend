@@ -30,7 +30,7 @@ export const SignIn = function () {
                 <Logo subtitle={'Faça o login e começe a usar'} />
             </header>
 
-            <form className="flex flex-col items-stretch w-full max-w-sm mt-10 gap-2 notebook:mt-7">
+            <form className="flex flex-col items-stretch w-full max-w-sm mt-10 gap-2 smallScreen:mt-7">
                 <Input
                     icon={Envelope}
                     title="Endereço de email"
@@ -47,12 +47,12 @@ export const SignIn = function () {
                     onChange={(event) => setPassword(event.target.value)}
                 />
 
-                <div className="mt-6 notebook:mt-3">
+                <div className="mt-6 smallScreen:mt-3">
                     <Button title={'Entrar'} onClick={handleSignIn} />
                 </div>
             </form>
 
-            <footer className=" mt-9 notebook:mt-3">
+            <footer className=" mt-9 smallScreen:mt-3">
                 <Link to="/signup" className="text-xs text-gray-300 underline">Não possui conta? Cria uma agora!</Link>
             </footer>
 

@@ -45,9 +45,14 @@ export default {
       },
 
       screens: {
-        notebook: {
-          raw: '(max-height:600px)',
+        mediumScreen: {
+          raw: '(max-height:900x)',
         },
+
+        smallScreen: {
+          raw: '(max-height:648px)',
+        },
+
         mobile: {
           raw: '(max-width: 648px)'
         },

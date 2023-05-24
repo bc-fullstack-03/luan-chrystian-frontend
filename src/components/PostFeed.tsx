@@ -39,7 +39,7 @@ export function PostFeed({ photoProfileUrl, name, text, image, likes, handleLike
                     <p className='text-md text-white font-normal mobile:text-sm'>{text}</p>
 
                     {image &&
-                        <img className='max-h-[216px] object-contain mt-2 rounded-[4px]' src={image} alt="" />
+                        <img className='max-h-[216px] mobile:max-w-[180px] object-contain mt-2 rounded-[4px]' src={image} alt="" />
                     }
                 </Link>
 

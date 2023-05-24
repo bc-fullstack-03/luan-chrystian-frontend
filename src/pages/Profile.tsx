@@ -50,15 +50,16 @@ export const Profile = function () {
     return (
         <div className="w-screen min-h-screen bg-gray-900 flex">
             <Menu />
-
             <Section>
+                
                 <div className="flex gap-12 bg-black text-gray-300 items-center justify-center mx-auto px-32 py-3 rounded-xl">
                     <p className={`${showUserDataScreen == true ? 'text-cyan-500' : 'text-gray-300'}`} onClick={toggleUserData}>Dados pessoais</p>
                     <p className={`${showBiographyScreen == true ? 'text-cyan-500' : 'text-gray-300'}`} onClick={toggleBiography}>Biografia</p>
                     <p>Suas publicações</p>
                 </div>
+                
 
-                <div className={`flex flex-col items-center gap-6 ${showUserDataScreen == false ? 'hidden' : ''}`}>
+                <div className={`flex flex-col items-center gap-6   ${showUserDataScreen == false ? 'hidden' : ''}`}>
                     {userData &&
                         (
                             <UserDataScreen photoUrl={userData.avatarUri} email={userData.email} name={userData.name} username={userData.username} />
@@ -72,6 +73,7 @@ export const Profile = function () {
                             <Biography />
                         )
                     }
+                
                 </div>
             </Section>
         </div>

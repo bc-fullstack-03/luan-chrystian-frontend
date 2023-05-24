@@ -134,17 +134,17 @@ export const Social = function () {
     }, [following, followers, inputSearchValue])
 
     return (
-        <div className="min-w-screen min-h-screen bg-gray-900 flex ">
+        <div className="min-w-screen min-h-screen bg-gray-900 flex overflow-hidden ">
             <Menu />
 
             <Section>
-                <div className="flex gap-12 bg-black text-gray-300 items-center justify-center mx-auto px-32 py-3 rounded-xl">
+                <div className="flex gap-12 bg-black text-gray-300 items-center justify-center mx-auto px-32 py-3 rounded-xl mobile:flex-col mobile:gap-1  mobile:px-8">
                     <p className={`${showSearch == true ? 'text-cyan-500' : 'text-gray-300'}`} onClick={handleToggleSearch}>Buscar</p>
                     <p className={`${showFollowers == true ? 'text-cyan-500' : 'text-gray-300'}`} onClick={handleToggleFollowers} >Seguidores</p>
                     <p className={`${showFollowings == true ? 'text-cyan-500' : 'text-gray-300'}`} onClick={handleToggleFollowings}>Seguindo</p>
                 </div>
 
-                <div className={`overflow-x-auto h-[775px] notebook:max-h-[480px] ${showFollowings ? '' : 'hidden'} `}>
+                <div className={`overflow-auto h-[775px] smallScreen:max-h-[480px] mediumScreen:max-h[600px] ${showFollowings ? '' : 'hidden'} `}>
                     {
                         following &&
                         following.map((data) => (
@@ -161,7 +161,7 @@ export const Social = function () {
                     <p className={`text-center mt-[150px] text-white font-bold ${following ? 'hidden' : ''}`}>Você não está seguindo ninguém</p>
                 </div>
 
-                <div className={`overflow-x-auto h-[775px] notebook:max-h-[480px] ${showFollowers ? '' : 'hidden'}`}>
+                <div className={`overflow-auto h-[775px] smallScreen:max-h-[480px] mediumScreen:max-h[600px] ${showFollowers ? '' : 'hidden'}`}>
                     {
                         followers && followers.length > 0 &&
                         followers.map((data) => (
@@ -173,15 +173,15 @@ export const Social = function () {
                                 key={data.id}
                                 photoUrl={data.avatarUri}
                                 isFollowed={verifyIsFollowed(data.id)}
-                                />
+                            />
                         ))
                     }
                     <p className={`text-center mt-[150px] text-white font-bold ${followers.length <= 0 ? '' : 'hidden'}`}>Você ainda não possui seguidores</p>
                 </div>
 
-                <div className={`overflow-x-auto h-[775px] notebook:max-h-[480px] ${showSearch ? '' : 'hidden'}`}>
+                <div className={`overflow-auto h-[750px] smallScreen:max-h-[480px] mediumScreen:max-h-[600px] ${showSearch ? '' : 'hidden'}`}>
 
-                    <div className="w-[600px] mx-auto pt-8">
+                    <div className="w-[600px] mobile:w-[300px] mx-auto mobile:mx-16 pt-8">
                         <Input
                             placeholder="Digite o nome do usuário"
                             onChange={(event: any) => setInputSearchValue(event.target.value)}

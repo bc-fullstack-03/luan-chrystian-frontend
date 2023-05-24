@@ -9,6 +9,7 @@ import { Button } from "../components/Button";
 
 import { api } from "../services/api";
 import { usePublicationManager } from "../hooks/contexts/publicationContext";
+import { PublicationProps } from "../types/entities/PublicationProps";
 
 export function Publication() {
     const [publiData, setPubliData] = useState<PublicationProps>()
@@ -38,13 +39,13 @@ export function Publication() {
     }, [publiData])
 
     return (
-        <div className="w-screen min-h-screen bg-gray-900 flex">
+        <div className="w-screen min-h-screen bg-gray-900 flex px-5 overflow-hidden">
             <Menu />
 
             <Section>
-                <h2 className="font-bold text-lg text-white pl-5 mb-4 mobile:text-center">Publicação</h2>
+                <h2 className="font-bold text-lg text-white pl-5 mb-4 mobile:text-left">Publicação</h2>
 
-                <div className="overflow-x-auto h-[780px] notebook:h-[490px] border-t border-gray-300">
+                <div className="overflow-x-auto h-[780px] smallScreen:h-[490px] border-t border-gray-300">
 
                     {publiData &&
                         (
@@ -58,7 +59,7 @@ export function Publication() {
                                     <p className="text-md text-start pt-8 pl-5"> {publiData.contentText} </p>
 
                                     <img
-                                        className={`bg-cover h-[320px] pl-5 rounded-lg mt-8 mb-8 ${publiData.contentImage ? '' : 'hidden'}`}
+                                        className={`bg-cover h-[320px] mobile:max-w-[360px] pl-5 rounded-lg mt-8 mb-8 ${publiData.contentImage ? '' : 'hidden'}`}
                                         src={publiData.contentImage}
                                         alt=""
                                     />

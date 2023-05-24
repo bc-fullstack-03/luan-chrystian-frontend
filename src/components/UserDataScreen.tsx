@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Input } from "./Input"
 import { FiMail } from "react-icons/fi"
 import { User, Lock, Camera, Check } from 'phosphor-react'
+import { FiCamera } from "react-icons/fi"
 import { api } from "../services/api"
 import { useAuth } from "../hooks/contexts/authContext"
 import { InputUpdate } from "./InputUpdate"
@@ -104,10 +105,10 @@ export function UserDataScreen({ photoUrl, email, name, username }: UserDataUpda
     }
 
     return (
-        <div className="mx-auto mt-10 text-cyan-300 font-bold text-md">
+        <div className="mx-auto mt-4 text-cyan-300 font-bold text-md">
             <Loading isLoading={isLoading} />
 
-            <div className="mx-auto">
+            <div className="mx-auto mt-8 smallScreen:mt-0 ">
                 <img
                     className="w-[120px] h-[120px] rounded-[50%] mx-auto "
                     src={image ? image : emptyPhoto}
@@ -115,17 +116,17 @@ export function UserDataScreen({ photoUrl, email, name, username }: UserDataUpda
                 />
 
                 <label className={`cursor-pointer flex items-center mr-24 -mt-4 justify-center  ${iconCheck ? 'hidden' : ''}`} htmlFor="avatar">
-                    <Camera size={25} />
+                    <Camera size={20} />
                 </label>
 
                 <span onClick={handlePhotoChange} className={`cursor-pointer flex items-center mr-24 -mt-4 justify-center   ${iconCheck ? '' : 'hidden'}`}>
-                    <Check size={25} />
+                    <Check size={20} />
                 </span>
 
                 <input onChange={handleUpload} id="avatar" className="hidden" type="file" />
             </div>
 
-            <div className="w-[515px] flex flex-col gap-3 mt-8">
+            <div className="w-[515px] flex flex-col gap-3 mt-4">
 
                 <div className="flex items-center gap-3 ">
                     <Input value={email} title="Email" type="email" icon={FiMail} disabled />
