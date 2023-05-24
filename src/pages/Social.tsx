@@ -26,6 +26,11 @@ export const Social = function () {
         setShowSearch(false)
     }
 
+    function verifyIsFollowed(id: string) {
+        var isFollow = following.find(data => data.id == id)
+        return isFollow ? true : false
+    }
+
     function handleToggleFollowers() {
         setShowFollowers(!showFollowers)
         setShowFollowings(false)
@@ -126,7 +131,7 @@ export const Social = function () {
             }
         }
         testAllFetchUser()
-    }, [inputSearchValue])
+    }, [following, followers, inputSearchValue])
 
     return (
         <div className="min-w-screen min-h-screen bg-gray-900 flex ">
@@ -149,6 +154,7 @@ export const Social = function () {
                                 following={data.following}
                                 follows={data.followers}
                                 photoUrl={data.avatarUri}
+                                isFollowed={verifyIsFollowed(data.id)}
                             />
                         ))
                     }
@@ -165,7 +171,9 @@ export const Social = function () {
                                 name={data.name}
                                 handle={() => handleFollows(data.id)}
                                 key={data.id}
-                                photoUrl={data.avatarUri} />
+                                photoUrl={data.avatarUri}
+                                isFollowed={verifyIsFollowed(data.id)}
+                                />
                         ))
                     }
                     <p className={`text-center mt-[150px] text-white font-bold ${followers.length <= 0 ? '' : 'hidden'}`}>Você ainda não possui seguidores</p>
@@ -191,7 +199,9 @@ export const Social = function () {
                                 following={data.following} follows={data.followers}
                                 name={data.name}
                                 key={data.id}
-                                photoUrl={data.avatarUri} />
+                                photoUrl={data.avatarUri}
+                                isFollowed={verifyIsFollowed(data.id)}
+                            />
                         ))
                     }
                 </div>

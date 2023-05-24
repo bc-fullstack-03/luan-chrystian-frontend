@@ -4,4 +4,5 @@ export interface FriendProps {
     follows?: Follower[] | null |  undefined
     following?: Following[] | null | undefined
     handle?: () => void
+    isFollowed?: boolean
 }

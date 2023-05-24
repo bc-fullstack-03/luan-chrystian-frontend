@@ -24,6 +24,7 @@ export function Publication() {
         setIsLoading(true)
         const response = await createComment(comment, publiParam)
         setIsLoading(response)
+        setComment('')
     }
 
     async function handleDeleteComment(postId: string, commentId: string) { deleteComment(postId, commentId) }
@@ -83,7 +84,7 @@ export function Publication() {
                                     <Comment
                                         author={comment.nameAuthor}
                                         photoProfile={comment.photoProfileUri}
-                                        userId={comment.authorId}
+                                        authorCommentId={comment.authorId}
                                         comment={comment.content}
                                         key={comment.id}
                                         deleteComment={() => { handleDeleteComment(comment.postId, comment.id) }}
@@ -93,7 +94,7 @@ export function Publication() {
                         </div>
 
                         <div className="pl-5 mt-8">
-                            <TextArea height="h-[145px]" title="Comentar" onChange={(event): any => setComment(event.target.value)} />
+                            <TextArea value={comment} height="h-[145px]" title="Comentar" onChange={(event): any => setComment(event.target.value)} />
                         </div>
 
                         <div className="pl-5 pb-4 mt-1 max-w-[180px]" >

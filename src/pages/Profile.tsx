@@ -38,6 +38,15 @@ export const Profile = function () {
         fetchUserData()
     }, [userData])
 
+    useEffect(() => {
+        function showUserDataScreenIfothersAreHidden () {
+            if(!showBiographyScreen && !showUserDataScreen) {
+                setShowUserDataScreen(true)
+            }
+        }
+        showUserDataScreenIfothersAreHidden()
+    },[showBiographyScreen, showUserDataScreen])
+
     return (
         <div className="w-screen min-h-screen bg-gray-900 flex">
             <Menu />
