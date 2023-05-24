@@ -14,71 +14,57 @@ export const Profile = function () {
     const { authEmail }: any = useAuth()
 
     function toggleUserData() {
-        if (showUserDataScreen == false) {
-            setShowUserDataScreen(true)
-            setShowBiographyScreen(false)
-        } else {
-            setShowUserDataScreen(false)
-        }
+        setShowUserDataScreen(!showUserDataScreen)
+        setShowBiographyScreen(false)
     }
 
     function toggleBiography() {
-        if (showBiographyScreen == false) {
-            setShowBiographyScreen(true)
-            setShowUserDataScreen(false)
-        } else {
-            setShowBiographyScreen(false)
-        }
-
+        setShowBiographyScreen(!showBiographyScreen)
+        setShowUserDataScreen(false)
     }
 
     useEffect(() => {
         async function fetchUserData() {
             const email: string = authEmail.replace(/"/g, "")
-            const response = await api.get(`/user/email?email=${email}`)
-            const data = response.data
-            setUserData(data)
-        }
 
+            try {
+                const response = await api.get(`/user/email?email=${email}`)
+                setUserData(response.data)
+
+            } catch (error) {
+                console.log("Error on fetchUserData function on page Profile.tsx" + error)
+            }
+        }
         fetchUserData()
     }, [userData])
 
     return (
         <div className="w-screen min-h-screen bg-gray-900 flex">
-
             <Menu />
 
             <Section>
-
                 <div className="flex gap-12 bg-black text-gray-300 items-center justify-center mx-auto px-32 py-3 rounded-xl">
-                    <p onClick={toggleUserData}>Dados pessoais</p>
-                    <p onClick={toggleBiography}>Biografia</p>
+                    <p className={`${showUserDataScreen == true ? 'text-cyan-500' : 'text-gray-300'}`} onClick={toggleUserData}>Dados pessoais</p>
+                    <p className={`${showBiographyScreen == true ? 'text-cyan-500' : 'text-gray-300'}`} onClick={toggleBiography}>Biografia</p>
                     <p>Suas publicações</p>
                 </div>
 
-                <div>
+                <div className={`flex flex-col items-center gap-6 ${showUserDataScreen == false ? 'hidden' : ''}`}>
+                    {userData &&
+                        (
+                            <UserDataScreen photoUrl={userData.avatarUri} email={userData.email} name={userData.name} username={userData.username} />
+                        )
+                    }
                 </div>
 
-                <div className="mx-auto mt-10 text-cyan-300 font-bold text-md">
-                    <div className={`flex flex-col items-center gap-6 ${showUserDataScreen == false ? 'hidden' : ''}`}>
-                        {userData &&
-                            (
-                                <UserDataScreen photoUrl={userData.avatarUri} email={userData.email} name={userData.name} username={userData.username} />
-                            )
-                        }
-                    </div>
-
-                    <div className="flex flex-col items-center gap-6">
-                        {showBiographyScreen &&
-                            (
-                                <Biography />
-                            )
-                        }
-                    </div>
+                <div className="flex flex-col items-center gap-6 mt-20">
+                    {showBiographyScreen &&
+                        (
+                            <Biography />
+                        )
+                    }
                 </div>
-
             </Section>
-
         </div>
     )
 }

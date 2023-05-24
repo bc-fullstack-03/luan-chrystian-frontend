@@ -5,17 +5,21 @@ import { Calendar } from 'phosphor-react'
 import { useAuth } from "../hooks/contexts/authContext";
 import { api } from "../services/api";
 import { InputSelect } from "./InputSelect";
+import { Loading } from "./Loading";
 
 export function Biography() {
     const [inputValue, setInputValue] = useState<string>()
     const [birth, setBirth] = useState<Biography>()
     const [gender, setGender] = useState<Biography>()
     const [relationshipStatus, setRelationshipStatus] = useState<Biography>()
+    const [isLoading, setIsLoading] = useState<boolean>()
 
     const { authEmail, token }: any = useAuth()
 
     async function handleBirthday() {
         const birthdate = inputValue
+        setInputValue('')
+        setIsLoading(true)
 
         const birthBodyRequest = {
             type: "birth",
@@ -23,43 +27,79 @@ export function Biography() {
         }
 
         try {
-            await api.post(`/user/biography/new`, birthBodyRequest, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            }).then(() => {
-                alert("Data atualizada")
-            })
+            if (birth) {
+                await api.patch(`user/biography/update/${birth.id}`, birthBodyRequest, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }).then(() => {
+                    setIsLoading(false)
+                })
+
+            } else {
+                await api.post(`/user/biography/new`, birthBodyRequest, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }).then(() => {
+                    setIsLoading(false)
+                })
+            }
 
         } catch (error) {
-            alert(error)
+            alert("Erro in handleBirthDay function on component Biography.tsx in page Profile.tsx" + error)
         }
     }
 
     async function handleGender() {
-        const gender = inputValue
+        const genderValue = inputValue
+        setInputValue('')
+        setIsLoading(true)
+
 
         const genderBodyRequest = {
             type: 'gender',
-            value: gender
+            value: genderValue
         }
 
         try {
-            await api.post(`/user/biography/new`, genderBodyRequest, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            }).then(() => {
-                alert("Gênero atualizado com sucesso")
-            })
+            if (gender) {
+                await api.patch(`/user/biography/update/${gender.id}`, genderBodyRequest, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }).then(() => {
+                    setIsLoading(false)
+                })
+
+            } else {
+                await api.post(`/user/biography/new`, genderBodyRequest, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }).then(() => {
+                    setIsLoading(false)
+                })
+            }
 
         } catch (error) {
-            alert(error)
+            alert("Error on handleGender function in component Biography.tsx on page Profile.tsx" + error)
         }
     }
 
     async function handleRelationship() {
+        // // const id1 = "6594c404-73fd-4083-b758-806771f290dd"
+        
+
+        // await api.delete(`/user/biography/delete/${id1}`, {
+        //     headers: {
+        //         Authorization: `Bearer ${token}`
+        //     }
+        // })
+
         const status = inputValue
+        setInputValue('')
+        setIsLoading(true)
 
         const statusBodyRequest = {
             type: 'relationship',
@@ -67,13 +107,24 @@ export function Biography() {
         }
 
         try {
-            await api.post(`/user/biography/new`, statusBodyRequest, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            }).then(() => {
-                alert("Status de relacionamento atualizado com sucesso")
-            })
+            if (relationshipStatus) {
+                await api.patch(`/user/biography/update/${relationshipStatus.id}`, statusBodyRequest, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }).then(() => {
+                    setIsLoading(false)
+                })
+
+            } else {
+                await api.post(`/user/biography/new`, statusBodyRequest, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }).then(() => {
+                    setIsLoading(false)
+                })
+            }
 
         } catch (error) {
             alert(error)
@@ -108,6 +159,7 @@ export function Biography() {
 
     return (
         <div className="flex flex-col items-center">
+            <Loading isLoading={isLoading} />
 
             <InputUpdate
                 title={`${!birth ? 'Insira aqui' : 'Algum errado? Altere agora!'}`}
@@ -126,7 +178,7 @@ export function Biography() {
                 </div>
 
                 <InputSelect selectId="gender" title="Gender" onChange={(event: any) => { setInputValue(event.target.value) }} handle={handleGender}>
-                    <option disabled value="">Selecione</option>
+                    <option value="">Selecione</option>
                     <option value="Masculino">Masculino</option>
                     <option value="Feminino">Feminino</option>
                     <option value="Outro">Outro</option>
@@ -139,7 +191,7 @@ export function Biography() {
                 </div>
 
                 <InputSelect selectId="status" title="Status de relaciomento" onChange={(event: any) => { setInputValue(event.target.value) }} handle={handleRelationship}>
-                    <option disabled value="">Selecione</option>
+                    <option value="">Selecione</option>
                     <option value="Solteiro">Solteiro&#40;a&#41;</option>
                     <option value="Namorando">Namorando</option>
                     <option value="Casado">Casado&#40;a&#41;</option>

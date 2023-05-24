@@ -6,6 +6,7 @@ import { api } from "../services/api"
 import { useAuth } from "../hooks/contexts/authContext"
 import { InputUpdate } from "./InputUpdate"
 import { ChangeEvent } from "react"
+import { Loading } from "./Loading"
 
 export function UserDataScreen({ photoUrl, email, name, username }: UserDataUpdateProps) {
     const [newNickename, setNewNickame] = useState<string | undefined>()
@@ -13,23 +14,33 @@ export function UserDataScreen({ photoUrl, email, name, username }: UserDataUpda
     const [avatarFile, setAvatarFile] = useState<any>()
     const [image, setImage] = useState<string>(photoUrl)
     const [newPassword, setNewPassword] = useState<string>()
+    const [isLoading, setisLoading] = useState<boolean>(false)
+    const [iconCheck, setIconCheck] = useState<boolean>(false)
 
     const { token }: any = useAuth()
     const emptyPhoto: string = '../src/assets/User.svg'
 
     async function handleNameChange() {
+        setisLoading(true)
         let bodyRequest = {
             username: newNickename
         }
 
-        setNewNickame('')
+        try {
+            await api.put(`/user/rename`, bodyRequest, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                }
+            }).then(() => {
+                setisLoading(false)
+            })
 
-        await api.put(`/user/rename`, bodyRequest, {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`
-            }
-        }).then(() => alert("Nome alterado com sucesso"))
+        } catch(error) {
+            setisLoading(false)
+            alert("Nome indisponível")
+            console.log("Error in handleNameChange function in component UserDataScreen.tsx on page Profile.tsx" + error)
+        }
     }
 
     async function handlePasswordChange() {
@@ -39,20 +50,28 @@ export function UserDataScreen({ photoUrl, email, name, username }: UserDataUpda
             newPassword: newPassword
         }
 
-        await api.patch("/user/newpassword", requestBody)
-            .then(() => { alert("Senha alterada com sucesso") })
+        try {
+            await api.patch("/user/newpassword", requestBody)
+            .then(() => { setisLoading(false) })
+
+        } catch(error) {
+            setisLoading(false)
+            alert("Invalid password")
+            console.log("Error in handlePasswordChange function in component UserDataScreen.tsx on page Profile.tsx" + error)
+        }
     }
 
     async function handleUpload(event: ChangeEvent<HTMLInputElement>) {
+        setisLoading(true)
         const file: any = event.target.files?.[0]
         const imagePreview = URL.createObjectURL(file)
         setImage(imagePreview)
         setAvatarFile(file);
-
+        setIconCheck(true)
+        setisLoading(false)
     }
 
     async function handlePhotoChange() {
-
         const formData = new FormData()
 
         formData.append('photo', avatarFile)
@@ -60,13 +79,18 @@ export function UserDataScreen({ photoUrl, email, name, username }: UserDataUpda
         const result = confirm("Confirmar nova foto")
 
         if (result) {
+            setisLoading(true)
 
             await api.patch("user/avatar", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     Authorization: `Bearer ${token}`
                 }
-            }).then(() => alert("Foto alterada com sucesso"))
+            }).then(() => {
+                alert("Foto alterada com sucesso")
+                setisLoading(false)
+                setIconCheck(false)
+            })
 
             await api.patch("/publications/profile", {}, {
                 headers: {
@@ -80,24 +104,28 @@ export function UserDataScreen({ photoUrl, email, name, username }: UserDataUpda
     }
 
     return (
-        <>
-            <div>
+        <div className="mx-auto mt-10 text-cyan-300 font-bold text-md">
+            <Loading isLoading={isLoading} />
+
+            <div className="mx-auto">
                 <img
-                    className="w-[120px] h-[120px] rounded-[50%]"
+                    className="w-[120px] h-[120px] rounded-[50%] mx-auto "
                     src={image ? image : emptyPhoto}
                     alt=""
                 />
 
-                <label className={`cursor-pointer absolute -mt-2 ${avatarFile ? 'hidden' : ''}`} htmlFor="avatar">
+                <label className={`cursor-pointer flex items-center mr-24 -mt-4 justify-center  ${iconCheck ? 'hidden' : ''}`} htmlFor="avatar">
                     <Camera size={25} />
                 </label>
 
-                <button onClick={handlePhotoChange} className={`cursor-pointer absolute -mt-2 ${avatarFile ? '' : 'hidden'}`}><Check size={25} /></button>
+                <span onClick={handlePhotoChange} className={`cursor-pointer flex items-center mr-24 -mt-4 justify-center   ${iconCheck ? '' : 'hidden'}`}>
+                    <Check size={25} />
+                </span>
 
                 <input onChange={handleUpload} id="avatar" className="hidden" type="file" />
             </div>
 
-            <div className="w-[515px] flex flex-col gap-3 ">
+            <div className="w-[515px] flex flex-col gap-3 mt-8">
 
                 <div className="flex items-center gap-3 ">
                     <Input value={email} title="Email" type="email" icon={FiMail} disabled />
@@ -128,6 +156,6 @@ export function UserDataScreen({ photoUrl, email, name, username }: UserDataUpda
                     <Input readOnly title="Senha atual" placeholder="Digite sua senha atual" onChange={(event: any) => setPassword(event.target.value)} type="text" icon={Lock} />
                 </InputUpdate>
             </div>
-        </>
+        </div>
     )
 }

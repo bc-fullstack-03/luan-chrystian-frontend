@@ -49,7 +49,6 @@ export function PublicationProvider({ children }: PublicationProviderProps) {
     }
 
     async function createComment(comment: string, postId: string) {
-
         const commentRequestBody = {
             content: comment
         }
@@ -59,6 +58,8 @@ export function PublicationProvider({ children }: PublicationProviderProps) {
                 Authorization: `Bearer ${token}`
             }
         }).then(() => console.log("Comentário criado"))
+
+        return false // Return to set isLoading how false
     }
 
     async function deleteComment(postId: string, commentId: string) {

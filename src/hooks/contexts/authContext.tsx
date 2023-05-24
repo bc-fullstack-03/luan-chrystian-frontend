@@ -22,6 +22,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
             setData({ token, userID, email })
 
+            return false // Return for set isLoading how false
+
         } catch (error) {
             return alert("Não foi possivel realizar o login" + error)
         }
@@ -51,7 +53,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }, [])
 
     return (
-        <AuthContext.Provider value={{ signIn, signOut, user: data.userID, token: data.token , authEmail: data.email }}>
+        <AuthContext.Provider value={{ signIn, signOut, user: data.userID, token: data.token, authEmail: data.email }}>
             {children}
         </AuthContext.Provider>
     )

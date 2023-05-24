@@ -1,78 +1,85 @@
+import { useEffect, useState } from 'react'
+
 import { Menu } from "../components/Menu"
 import { PostFeed } from "../components/PostFeed"
 import { Section } from "../components/Section"
 import { User } from "../components/User"
-import { useEffect, useState } from 'react'
+
 import { api } from "../services/api"
 import { useAuth } from "../hooks/contexts/authContext"
 import { usePublicationManager } from "../hooks/contexts/publicationContext"
-import { ExitButton } from "../components/ExitButton"
-import { useDataUser } from "../hooks/contexts/UserContext"
-import { UserProps } from "../components/types/UserProps"
 
 export const Home = function () {
     const [myData, setMyData] = useState<User>()
-    const [followingIds, setFollowingIds] = useState<any[]>([])
+    const [followingIds, setFollowingIds] = useState<string[]>([])
     const [publications, setPublications] = useState<PublicationProps[]>([]);
 
     const { authEmail, token }: any = useAuth()
     const { deletePost, likeManager }: any = usePublicationManager()
-    // const { data }: any = useDataUser()
 
     function verifyAuthorIdPostToShowDeleteButton(authorPostId: string) { return myData?.id == authorPostId ? true : false }
 
     useEffect(() => {
-
         async function fetchMyData() {
             const email: string = authEmail.replace(/"/g, "")
-            const response = await api.get(`/user/email?email=${email}`)
-            setMyData(response.data)
-        }
 
-        fetchMyData()
+            try {
+                const response = await api.get(`/user/email?email=${email}`)
+                setMyData(response.data)
 
-        async function getIdUsersIFollow() {
-            const email: string = authEmail.replace(/"/g, "");
-            const response = await api.get(`/user/email?email=${email}`);
-            const myId = response.data.id;
-            const following = response.data.following;
-
-            if (following != null) {
-                const ids = following.map((user: any) => user.id);
-                return setFollowingIds([myId, ...ids]);
-
-            } else {
-                setFollowingIds([myId]);
+            } catch (error) {
+                console.log("Error in fetchMyData function on page Home.tsx" + error)
             }
         }
+        fetchMyData()
 
-        getIdUsersIFollow()
-    }, [])
+        async function getIdOfUsersIfollow() {
+            const email: string = authEmail.replace(/"/g, "");
+
+            try {
+                const response = await api.get(`/user/email?email=${email}`);
+                const myId = response.data.id;
+                const followings = response.data.following;
+
+                if (followings != null) {
+                    const ids = followings.map((user: Following) => user.id);
+                    return setFollowingIds([myId, ...ids]); // I need my ID too because i want show my publications in feed
+
+                } else {
+                    setFollowingIds([myId]);
+                }
+            } catch (error) {
+                console.log("Error in getIdOfUsersIfollow function on page Home.tsx")
+            }
+        }
+        getIdOfUsersIfollow()
+    }, [myData])
 
     useEffect(() => {
         async function getPublications() {
-
             const ids = followingIds
 
-            if (ids.length != 0) {
-                let posts: PublicationProps[] = [];
+            try {
+                if (ids.length != 0) {
+                    let posts: PublicationProps[] = [];
 
-                for (const id of ids) {
-                    const response = await api.get(`publications/all/${String(id)}`)
-                    const userPosts = response.data;
-                    posts = posts.concat(userPosts);
+                    for (const id of ids) {
+                        const response = await api.get(`publications/all/${id}`)
+                        posts = posts.concat(response.data);
+                    }
+
+                    const filteredPublications = posts.filter((post, index, self) => {
+                        return Object.keys(post).length !== 0
+                    })
+
+                    setPublications(filteredPublications)
                 }
 
-                const filteredPublications = posts.filter((post, index, self) => {
-                    return Object.keys(post).length !== 0
-                })
-
-                setPublications(filteredPublications)
+            } catch (error) {
+                console.log("Error in getPublications function on page home.tsx " + error)
             }
         }
-
         getPublications()
-
     }, [publications, followingIds, myData])
 
     return (
@@ -88,14 +95,9 @@ export const Home = function () {
                             <User name={myData.username} photoUrl={myData.avatarUri} />
                         )
                     }
-
-
-                    <ExitButton />
-
                 </div>
 
                 <div className="overflow-x-auto h-[688px] notebook:max-h-[410px]">
-
                     {publications &&
 
                         publications.map((data
@@ -117,7 +119,7 @@ export const Home = function () {
                     }
                 </div>
             </Section>
-
+            
         </div>
     )
 }

@@ -6,21 +6,26 @@ import { Lock } from 'phosphor-react'
 import { Link } from "react-router-dom";
 import { useState } from "react"
 import { useAuth } from "../hooks/contexts/authContext"
+import { Loading } from "../components/Loading"
 
 export const SignIn = function () {
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+
 
     const { signIn }: any = useAuth()
 
     function handleSignIn(event: React.FormEvent) {
+        setIsLoading(true)
         event.preventDefault()
-        signIn({ email, password })
+       const response =  signIn({ email, password })
+
+       setIsLoading(response)
     }
 
     return (
         <div className="w-screen h-screen bg-gray-900 flex flex-col items-center justify-center">
-
             <header>
                 <Logo subtitle={'Faça o login e começe a usar'} />
             </header>
@@ -43,18 +48,15 @@ export const SignIn = function () {
                 />
 
                 <div className="mt-6 notebook:mt-3">
-
                     <Button title={'Entrar'} onClick={handleSignIn} />
-                    
                 </div>
             </form>
 
             <footer className=" mt-9 notebook:mt-3">
-
                 <Link to="/signup" className="text-xs text-gray-300 underline">Não possui conta? Cria uma agora!</Link>
             </footer>
 
+            <Loading isLoading={isLoading} />
         </div>
-
     )
 }

@@ -26,14 +26,16 @@ export const SignUp = function () {
             return alert("Preencha todos os campos do formulário!")
         }
 
-        api.post("/user/signup", { name, email, username, password })
-            .then(() => {
-                alert("Usuário cadastrado com sucesso")
-                navigate("/signin")
-            })
-            .catch(error => {
-                alert("Não foi possível cadastrar o usuário" + error)
-            })
+        try {
+            api.post("/user/signup", { name, email, username, password })
+                .then(() => {
+                    alert("Usuário cadastrado com sucesso")
+                    navigate("/")
+                })
+                
+        } catch (error) {
+            console.log("Error in handleSignUp function on page SignUp.tsx" + error)
+        }
     }
 
     return (
