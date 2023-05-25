@@ -31,9 +31,9 @@ Features demonstradas em vídeo:
 - Follow e unfollow; Curtindo publicação de usuário; 
 - Comentando publicação de usuário e Logout;
 
+https://github.com/bc-fullstack-03/luan-chrystian-frontend/assets/107001881/990cbfab-83ab-4b67-b4e5-86446d16b332
 
-[![Nome do Vídeo](https://img.youtube.com/vi/lMehuiGR5DE/0.jpg)](https://youtu.be/lMehuiGR5DE)
-
+Caso o vídeo não esteja disponível: https://youtu.be/lMehuiGR5DE
 
 ### Pontos adicionais
 - Disponível breakpoints personalizados de responsividade, desde para telas grandes, pequenas e mobile.
