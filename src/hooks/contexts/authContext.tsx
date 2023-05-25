@@ -29,7 +29,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             return false // Return for set isLoading how false
 
         } catch (error) {
-            return alert("Não foi possivel realizar o login" + error)
+            alert("Não foi possivel realizar o login" + error)
+            return false // Return for set isLoading how false
         }
     }
 

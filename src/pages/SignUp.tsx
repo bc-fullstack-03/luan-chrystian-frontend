@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 import { useState } from "react"
 import { api } from "../services/api"
 import { useNavigate } from "react-router-dom"
+import { Loading } from "../components/Loading"
 
 export const SignUp = function () {
     const [name, setName] = useState<string>()
@@ -12,11 +13,13 @@ export const SignUp = function () {
     const [email, setEmail] = useState<string>()
     const [password, setPassword] = useState<string>()
     const [repeatPassword, setRepeatPassword] = useState<string>()
+    const [ isLoading, setIsLoading] = useState<boolean>()
 
     const navigate = useNavigate()
 
     async function handleSignUp(event: React.FormEvent) {
         event.preventDefault()
+        setIsLoading(true)
 
         if (repeatPassword !== password) {
             return alert("As senhas não conferem")
@@ -31,15 +34,18 @@ export const SignUp = function () {
                 .then(() => {
                     alert("Usuário cadastrado com sucesso")
                     navigate("/")
+                    setIsLoading(false)
                 })
                 
         } catch (error) {
+            setIsLoading(false)
             console.log("Error in handleSignUp function on page SignUp.tsx" + error)
         }
     }
 
     return (
         <div className="w-screen min-h-screen bg-gray-900 flex flex-col items-center justify-center">
+            <Loading isLoading={isLoading} />
 
             <header className="flex justify-center gap-2 pl-3 pr-3">
                 <h1 className="text-lg font-bold text-cyan-500 text-center flex items-start">

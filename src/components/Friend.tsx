@@ -1,7 +1,12 @@
 import { Button } from "./Button"
 import { User } from "./User"
+import { useEffect } from "react"
 
 export function Friend({ name, photoUrl, follows, following, handle, isFollowed, username }: FriendProps) {
+
+    useEffect(() => {
+        console.log("Test")
+    }, [isFollowed])
 
     return (
         <div className='flex flex-col border-b border-gray-300 pl-5 pt-5 pb-8'>

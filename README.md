@@ -12,16 +12,25 @@
 - https://github.com/LuanC14/NetSys_Parrot_Backend
 
 ### Como executar a aplicação
+
+##### Front-End:
+- ```https://github.com/bc-fullstack-03/luan-chrystian-frontend ``` Para clonar o repositório na sua IDE
+- ```npm install ``` Para instalar as dependências necessárias
+- ```npm run dev ``` Para executar o Front-End
+
 ##### Back-End:
 É necessário ter o Docker instalado para executar a aplicação localmente.
 - ```git clone https://github.com/LuanC14/NetSys_Parrot_Backend.git ``` Para clonar o repositório na sua IDE
 - ```docker-compose up -d  ``` Para criar os contêineres do MongoDB e do LocalStack (Bucket-S3) 
 - Realizados estes comandos, basta buildar e executar o backend na sua IDE.
 
-##### Front-End:
-- ```https://github.com/bc-fullstack-03/luan-chrystian-frontend ``` Para clonar o repositório na sua IDE
-- ```npm install ``` Para instalar as dependências necessárias
-- ```npm run dev ``` Para executar o Front-End
+##### ! Caso o Bucket-S3 do LocalStack não tenha persistido durante o processo, siga estes passos:
+- Executar o contêiner do Localstack: ```` docker exec -it IdDoContêinerLocalStack bash ````
+- Inicializar a shell do AWS através do comando ``` aws configure --profile default ```
+- Preencher o restante dos campos conforme a imagem.
+![preview](./src/public/bucket.jpg)
+
+
 
 ### Demonstração: Versão 1.0.0
 Features demonstradas em vídeo: 

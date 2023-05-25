@@ -126,10 +126,10 @@ export const Social = function () {
 
         fetchFollowsAndFollowings();
 
-    }, [followers, following])
+    }, [followers, following, verifyIsFollowed])
 
     useEffect(() => {
-        async function testAllFetchUser() {
+        async function fethAllUsers() {
             inputSearchValue.length <= 0 ? setInputSearchValue('*') : ''
 
             try {
@@ -140,7 +140,7 @@ export const Social = function () {
                 console.log(error)
             }
         }
-        testAllFetchUser()
+        fethAllUsers()
     }, [following, followers, inputSearchValue])
 
     return (
