@@ -18,7 +18,8 @@ Features demonstradas em vídeo:
 - Buscando um usuário no Input da tela Social; 
 - Follow e unfollow; Curtindo publicação de usuário; 
 - Comentando publicação de usuário e Logout;
- https://github.com/bc-fullstack-03/luan-chrystian-frontend/assets/107001881/f7d3f7a4-1411-47f5-b016-55f377002f3
+
+https://github.com/bc-fullstack-03/luan-chrystian-frontend/assets/107001881/d131330f-2d4a-4a60-a945-55d49a13b739
 
 ### Pontos adicionais
 - Disponível breakpoints personalizados de responsividade, desde para telas grandes, pequenas e mobile.
