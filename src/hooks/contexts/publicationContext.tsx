@@ -2,6 +2,7 @@ import { createContext, useContext } from "react";
 import { ReactNode } from "react";
 import { api } from "../../services/api";
 import { useAuth } from "./authContext";
+import { PublicationProps } from "../../types/entities/PublicationProps";
 
 export const PublicationContext = createContext({})
 

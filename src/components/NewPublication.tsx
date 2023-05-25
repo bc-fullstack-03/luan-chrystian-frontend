@@ -45,6 +45,7 @@ export function NewPublication({ close }: ButtonProps) {
             return res.data
         })
 
+        setIsLoading(false)
         navigate(`/publication?id=${data.id}`)
         alert("Publicação realizada com sucesso")
     }

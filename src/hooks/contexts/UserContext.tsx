@@ -3,6 +3,8 @@ import { ReactNode } from "react";
 import { api } from "../../services/api";
 import { useAuth } from "./authContext";
 
+// Sem uso pois não deu tempo de corrigir alguns bugs
+
 interface PublicationProviderProps {
     children: ReactNode
 }
