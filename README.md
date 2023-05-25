@@ -46,6 +46,7 @@ Caso o vídeo não esteja disponível: https://youtu.be/lMehuiGR5DE
 
 ### Pontos adicionais
 - Disponível breakpoints personalizados de responsividade, desde para telas grandes, pequenas e mobile.
+- Disponível um componente exibido durante execução das promises
 - Na versão mobile algumas telas deixei indisponíveis, como por exemplo a de criação de publicação e alteração de dados do perfil por conta de alguns inconvenientes temporários em relação a responsividade.
 
 ##### Obs: Tentarei fazer o deploy da aplicação e conectar ao backend até 00:00
