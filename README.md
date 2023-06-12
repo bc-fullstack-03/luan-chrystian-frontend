@@ -31,6 +31,12 @@
 ![preview](./src/public/bucket.jpg)
 
 
+### Apresentação do Projeto no Linkedin:
+O projeto do link corresponde ao que está no meu repositório, nele contém novas features e correções que optei em deixar separado, mantendo aqui somente o que consegui realizar dentro do prazo.
+https://www.linkedin.com/feed/update/urn:li:activity:7069074342633947136/
+
+---
+
 
 ### Demonstração: Versão 1.0.0
 Features demonstradas em vídeo: 
